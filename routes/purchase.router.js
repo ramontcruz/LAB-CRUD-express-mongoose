@@ -1,9 +1,9 @@
 import express from "express";
 import PurchaseModel from "../models/purchase.model.js";
 
-const router = express.Router();
+const purchaseRouter = express.Router();
 
-router.get("/purchases/:purchaseId", async(request,response)=>{
+purchaseRouter.get("/purchases/:purchaseId", async(request,response)=>{
     try {
         const { id } = request.params;
         const purchase = await PurchaseModel.findById(id).populate("album");
@@ -14,7 +14,7 @@ router.get("/purchases/:purchaseId", async(request,response)=>{
     }  
 });
 
-router.post("/purchases",async(request,response)=>{
+purchaseRouter.post("/purchases",async(request,response)=>{
     try{
         const AddAlbumToPurchase = await PurchaseModel.create(
             {albums:request.body.albums}
@@ -37,4 +37,4 @@ router.post("/purchases",async(request,response)=>{
     }
 });
 
-export default router;
+export default purchaseRouter;

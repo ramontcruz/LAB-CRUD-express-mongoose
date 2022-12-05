@@ -1,9 +1,9 @@
 import express from "express";
 import AlbumModel from "../models/album.model.js";
 
-const router = express.Router();
+const albumRouter = express.Router();
 
-router.get("/albums", async(request,response)=>{
+albumRouter.get("/albums", async(request,response)=>{
     try {
         const album = await AlbumModel.find();
         return response.status(200).json(album);
@@ -13,7 +13,7 @@ router.get("/albums", async(request,response)=>{
     }   
 });
 
-router.get("/albums/:albumId", async(request,response)=>{
+albumRouter.get("/albums/:albumId", async(request,response)=>{
     try {
         const { id } = request.params;
         const album = await AlbumModel.findById(id);
@@ -26,7 +26,7 @@ router.get("/albums/:albumId", async(request,response)=>{
     }  
 });
 
-router.post("/albums",async(request,response)=>{
+albumRouter.post("/albums",async(request,response)=>{
     try{
         const newAlbum = await AlbumModel.create(request.body);
         return response.status(201).json(newAlbum);
@@ -37,7 +37,7 @@ router.post("/albums",async(request,response)=>{
    
 });
 
-router.put("/albums/:albumId", async(request, response) => {
+albumRouter.put("/albums/:albumId", async(request, response) => {
     try{
         const { id } = request.params;
         const update = await AlbumModel.findByIdAndUpdate(
@@ -52,7 +52,7 @@ router.put("/albums/:albumId", async(request, response) => {
     }
   });
 
-router.delete("/albums/:albumId",async(request,response)=>{
+  albumRouter.delete("/albums/:albumId",async(request,response)=>{
     try{
         const { id } = request.params;
         const deleteAlbum = await AlbumModel.findByIdAndDelete(id);
@@ -63,4 +63,4 @@ router.delete("/albums/:albumId",async(request,response)=>{
     }
 });
 
-export default router;
+export default albumRouter;
